@@ -1,0 +1,198 @@
+/* 
+Couleurs utilisées:
+Vert principal: #2ecc71
+Vert foncé: #27ae60
+Bleu: #3498db
+Fond clair: #f1f8e9
+Bleu foncé: #2c3e50 
+*/
+
+/* Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #2c3e50;
+    background-color: #f1f8e9;
+    font-size: 16px;
+}
+
+/* En-tête */
+header {
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+nav {
+    padding: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo a {
+    color: #2ecc71;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* Menu mobile */
+.menu-toggle {
+    display: block;
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+.menu-toggle span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: #2c3e50;
+    margin: 5px 0;
+    transition: 0.3s;
+}
+
+/* Navigation */
+.nav-links {
+    display: none;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.nav-links.active {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.nav-links a {
+    color: #2c3e50;
+    text-decoration: none;
+    padding: 0.5rem;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.cta-button {
+    background-color: #2ecc71;
+    color: white !important;
+}
+
+/* Section principale */
+.hero {
+    background: linear-gradient(135deg, #2ecc71, #3498db);
+    color: white;
+    padding: 2rem 1rem;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+/* Formulaire de recherche */
+.search-section {
+    padding: 5rem 1rem;
+}
+
+.search-form {
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.25rem;
+    color: #2c3e50;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.search-button {
+    width: 100%;
+    padding: 1rem;
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.search-button:hover {
+    background-color: #27ae60;
+}
+
+/* Pied de page */
+footer {
+    background-color: #2c3e50;
+    color: white;
+    padding: 2rem 1rem;
+    margin-top: 2rem;
+    text-align: center;
+}
+
+footer a {
+    color: #2ecc71;
+    text-decoration: none;
+}
+
+/* Responsive tablette et desktop */
+@media screen and (min-width: 768px) {
+    .menu-toggle {
+        display: none;
+    }
+
+    .nav-links {
+        display: flex;
+        flex-direction: row;
+        width: auto;
+        margin-top: 0;
+        gap: 1.5rem;
+    }
+
+    .search-form {
+        padding: 2rem;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .search-form {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 1rem;
+    }
+
+    .search-button {
+        grid-column: 1 / 4;
+    }
+}
