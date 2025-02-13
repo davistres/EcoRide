@@ -436,3 +436,37 @@ footer a {
 #password:valid {
     border-color: #2ecc71;
 }
+
+
+
+
+/* Page Register /////////////////////////////////////////////////*/
+
+#confirm-password.password-mismatch {
+    border-color: #e74c3c;
+}
+
+#confirm-password:valid {
+    border-color: #2ecc71;
+}
+
+
+/* Contact /////////////////////////////////////////////////*/
+#contact-form textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box;
+    resize: vertical;
+    min-height: 100px;
+}
+
+#contact-form select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box;
+    background-color: white;
+}
