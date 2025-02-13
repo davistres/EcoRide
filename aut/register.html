@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoRide - Créer un compte</title>
+    <link rel="stylesheet" href="../assets/style/styles.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="/">EcoRide</a>
+            </div>
+            <div class="burger" id="burger">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">Accueil</a></li>
+                <li><a href="/covoiturage">Covoiturage</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/connexion" class="cta-button">Connexion</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Menu Mobile -->
+    <div class="mobile-menu" id="mobile-menu">
+        <a href="/">Accueil</a>
+        <a href="/covoiturage">Covoiturage</a>
+        <a href="/contact">Contact</a>
+        <a href="/connexion">Connexion</a>
+        <div class="close-menu" id="close-menu">&times;</div>
+    </div>
+
+    <main>
+        <section class="login-section">
+            <h2>Créer un compte</h2>
+            <form class="login-form">
+                <div class="form-group">
+                    <label for="pseudo">Pseudo</label>
+                    <input type="text" id="pseudo" name="pseudo" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" id="password" name="password" required
+                        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+                        title="Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial">
+                    <small class="password-info">Le mot de passe doit contenir au moins 8 caractères, une majuscule, une
+                        minuscule, un chiffre et un caractère spécial</small>
+                </div>
+                <div class="form-group">
+                    <label for="confirm-password">Confirmer le mot de passe</label>
+                    <input type="password" id="confirm-password" name="confirm-password" required>
+                </div>
+                <div class="credits-info">
+                    <p>Vous recevrez 20 crédits à la création de votre compte !</p>
+                </div>
+                <button type="submit" class="search-button">Créer mon compte</button>
+            </form>
+            <p class="register-link">Déjà inscrit ? <a href="login.html">Se connecter</a></p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p class="copyright">&copy; 2024 EcoRide</p>
+            <nav class="footer-nav">
+                <a href="/mentions-legales">Mentions légales</a>
+                <a href="mailto:maildelentreprise@ecoride.fr">maildelentreprise@ecoride.fr</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script src="../assets/script/script.js"></script>
+</body>
+
+</html>

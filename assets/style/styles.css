@@ -7,7 +7,11 @@ Fond clair: #f1f8e9
 Bleu foncé: #2c3e50 
 */
 
-* {
+
+
+
+/* Page d'accueil /////////////////////////////////////////////////*/
+*/ * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -18,12 +22,17 @@ body {
     line-height: 1.6;
     color: #2c3e50;
     background-color: #f1f8e9;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
 }
 
 /* Header et Navigation */
 .navbar {
     position: fixed;
     width: 100%;
+    max-width: 100%;
     background-color: white;
     display: flex;
     justify-content: space-between;
@@ -31,6 +40,9 @@ body {
     padding: 1rem;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     z-index: 1000;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
 }
 
 .logo a {
@@ -145,6 +157,7 @@ body {
 /* Contenu principal */
 main {
     padding-top: 80px;
+    flex: 1;
 }
 
 .hero {
@@ -165,15 +178,16 @@ main {
 
 .search-form {
     background: white;
-    padding: 1rem;
+    padding: 2rem;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
+    max-width: 800px;
     margin: 0 auto;
 }
 
 .form-group {
     margin-bottom: 1rem;
+    width: 100%;
 }
 
 .form-group label {
@@ -186,6 +200,7 @@ main {
     padding: 0.5rem;
     border: 2px solid #ddd;
     border-radius: 8px;
+    box-sizing: border-box;
 }
 
 .search-button {
@@ -202,9 +217,11 @@ main {
 footer {
     background-color: #2c3e50;
     color: white;
-    padding: 2rem 1rem;
+    padding: 2rem 0;
     text-align: center;
     margin-top: 2rem;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 footer a {
@@ -215,9 +232,14 @@ footer a {
 .footer-nav {
     display: flex;
     justify-content: space-between;
-    margin: 0 50px;
+    padding: 0 1rem;
 }
 
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
 
 
 /* Version desktop */
@@ -246,12 +268,18 @@ footer a {
 
     .search-form {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 1rem;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        padding: 2rem;
+    }
+
+    .form-group {
+        margin-bottom: 0;
     }
 
     .search-button {
         grid-column: 1 / 4;
+        margin-top: 1rem;
     }
 }
 
@@ -331,4 +359,80 @@ footer a {
     .image-banner {
         margin-top: 3rem;
     }
+}
+
+/* Page LOGIN /////////////////////////////////////////////////*/
+
+.login-section {
+    max-width: 600px;
+    margin: 100px auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.login-section h2 {
+    color: #2c3e50;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.register-link {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: #2c3e50;
+}
+
+.register-link a {
+    color: #2ecc71;
+    text-decoration: none;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
+
+@media screen and (max-width: 768px) {
+    .login-section {
+        margin: 60px 1rem;
+        padding: 1rem;
+    }
+}
+
+
+
+
+/* Page s'enregistrer /////////////////////////////////////////////////*/
+
+.password-info {
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 0.5rem;
+    display: block;
+}
+
+.credits-info {
+    background-color: #f1f8e9;
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+    text-align: center;
+    color: #2ecc71;
+    font-weight: bold;
+}
+
+#password:invalid {
+    border-color: #e74c3c;
+}
+
+#password:valid {
+    border-color: #2ecc71;
 }
