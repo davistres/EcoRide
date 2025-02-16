@@ -1,4 +1,4 @@
-<?php include 'header.php'; ?>
+<?php include __DIR__ . '/layouts/header.php'; ?>
 
 <main>
     <section class="login-section">
@@ -31,4 +31,4 @@
     </section>
 </main>
 
-<?php include 'footer.php'; ?>
+<?php include __DIR__ . '/layouts/footer.php'; ?>

@@ -1,4 +1,4 @@
-<?php include 'header.php'; ?>
+<?php include __DIR__ . '/layouts/header.php'; ?>
 
 <main>
     <section class="login-section">
@@ -14,8 +14,9 @@
             </div>
             <button type="submit" class="search-button">Se connecter</button>
         </form>
-        <p class="register-link">Pas encore de compte ? <a href="index.php?route=register">Créer un compte</a></p>
+        <p class="register-link">Pas encore de compte ? <a href="index.php?route=register">Créer un compte</a>
+        </p>
     </section>
 </main>
 
-<?php include 'footer.php'; ?>
+<?php include __DIR__ . '/layouts/footer.php'; ?>

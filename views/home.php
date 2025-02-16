@@ -1,4 +1,4 @@
-<?php include 'header.php'; ?>
+<?php include __DIR__ . '/layouts/header.php'; ?>
 
 <main class="home">
     <section class="hero">
@@ -20,8 +20,12 @@
                 <label for="date">Date</label>
                 <input type="date" id="date" name="date" required>
             </div>
-            <button type="submit" class="search-button">Rechercher un trajet</button>
+            <button type="button" class="search-button" id="search">Rechercher un trajet</button>
         </form>
+    </section>
+    <section class="map-section">
+        <div id="map" style="height: 400px;"></div>
+
     </section>
     <section class="presentation">
         <div class="text-content">
@@ -32,17 +36,17 @@
 
             <div class="features">
                 <div class="feature">
-                    <img src="../public/ecolo.webp" alt="Icône écologie">
+                    <img src="assets/images/ecolo.webp" alt="Icône écologie">
                     <h3>Écologique</h3>
                     <p>Nous encourageons particulièrement les trajets en véhicules électriques</p>
                 </div>
                 <div class="feature">
-                    <img src="../public/econo.webp" alt="Icône économie">
+                    <img src="assets/images/econo.webp" alt="Icône économie">
                     <h3>Économique</h3>
                     <p>Des trajets à prix réduits pour voyager malin</p>
                 </div>
                 <div class="feature">
-                    <img src="../public/commu.webp" alt="Icône communauté">
+                    <img src="assets/images/commu.webp" alt="Icône communauté">
                     <h3>Communautaire</h3>
                     <p>Rejoignez une communauté de voyageurs responsables</p>
                 </div>
@@ -50,9 +54,9 @@
         </div>
 
         <div class="image-banner">
-            <img src="../public/pexels-cottonbro-5329298.jpg" alt="Covoiturage EcoRide" class="main-image">
+            <img src="assets/images/pexels-cottonbro-5329298.jpg" alt="Covoiturage EcoRide" class="main-image">
         </div>
     </section>
 </main>
 
-<?php include 'footer.php'; ?>
+<?php include __DIR__ . '/layouts/footer.php'; ?>

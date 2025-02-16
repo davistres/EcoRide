@@ -7,9 +7,9 @@ class Router {
     }
 
     public function handleRequest() {
-        $route = $_GET['route'] ?? '/';
+        $route = $_GET['route'] ?? 'home';
         if (array_key_exists($route, $this->routes)) {
-            require __DIR__ . '/../views/' . $this->routes[$route];
+            require __DIR__ . '/../views/' . $this->routes[$route]  . '.php';
         } else {
             require __DIR__ . '/../views/404.php';
         }

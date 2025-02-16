@@ -8,7 +8,7 @@ http_response_code(404);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EcoRide - Page non trouvée</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 
 <body class="body404">
@@ -47,4 +47,4 @@ http_response_code(404);
         </section>
     </main>
 
-    <?php include 'footer.php'; ?>
+    <?php include __DIR__ . '/layouts/footer.php'; ?>

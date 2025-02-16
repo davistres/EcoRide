@@ -120,7 +120,7 @@ body {
     position: fixed;
     top: 0;
     left: -100%;
-    height: 70vh;
+    height: 380px;
     background-color: #2ecc71;
     transition: left 0.3s ease-in-out;
     padding-top: 80px;
@@ -509,4 +509,12 @@ footer a {
     background-color: #27ae60;
     transform: translateY(-2px);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+
+/* mention /////////////////////////////////////////////////*/
+
+.mention {
+    margin: 20px;
+    text-align: justify;
 }

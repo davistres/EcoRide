@@ -1,6 +1,6 @@
-<?php include 'header.php'; ?>
+<?php include __DIR__ . '/layouts/header.php'; ?>
 
-<main>
+<main class="home mention">
     <section class="mentions-legales">
         <h2>Définitions</h2>
         <p><b>Client :</b> tout professionnel ou personne physique capable au sens des articles 1123 et suivants du
@@ -442,4 +442,4 @@
     </section>
 </main>
 
-<?php include 'footer.php'; ?>
+<?php include __DIR__ . '/layouts/footer.php'; ?>

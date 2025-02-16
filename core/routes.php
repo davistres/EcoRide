@@ -1,11 +1,10 @@
 <?php
 return [
-    '/' => 'home.php',
-    'home' => 'home.php',
-    'login' => 'login.php',
-    'contact' => 'contact.php',
-    'covoiturage' => 'covoiturage.php',
-    'mentions-legales' => 'mentions.php',
-    'register' => 'register.php',
+    'home' => 'home',
+    'login' => 'login',
+    'contact' => 'contact',
+    'covoiturage' => 'covoiturage',
+    'mentions-legales' => 'mentions',
+    'register' => 'register',
 ];
 ?>
