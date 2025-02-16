@@ -1,20 +1,17 @@
 <?php
-spl_autoload_register(function ($class) {
-    $paths = [
-        __DIR__ . '/../classes/',
-        __DIR__ . '/../core/',
-    ];
 
-    foreach ($paths as $path) {
-        $file = $path . $class . '.php';
-        if (file_exists($file)) {
-            require_once $file;
-            return;
-        }
-    }
-});
+use Illuminate\Http\Request;
 
-require __DIR__ . '/../core/Router.php';
+define('LARAVEL_START', microtime(true));
 
-$router = new Router();
-$router->handleRequest();
+// Determine if the application is in maintenance mode...
+if (file_exists($maintenance = __DIR__.'/../storage/framework/maintenance.php')) {
+    require $maintenance;
+}
+
+// Register the Composer autoloader...
+require __DIR__.'/../vendor/autoload.php';
+
+// Bootstrap Laravel and handle the request...
+(require_once __DIR__.'/../bootstrap/app.php')
+    ->handleRequest(Request::capture());
