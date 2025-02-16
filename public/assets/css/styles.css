@@ -452,6 +452,16 @@ footer a {
 
 /* Page Register /////////////////////////////////////////////////*/
 
+.password-requirements {
+    padding: 5px 20px;
+    font-size: 0.6rem;
+    color: #666;
+}
+
+.deca {
+    margin-top: 1rem;
+}
+
 #confirm-password.password-mismatch {
     border-color: #e74c3c;
 }

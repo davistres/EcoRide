@@ -1,3 +1,4 @@
+# Activer le module de réécriture
 RewriteEngine On
 
 # Headers CORS

@@ -122,7 +122,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.log('Départ:', start);
                 console.log('Arrivée:', end);
 
-                // On inverse les coordonnées pour l'API
                 const startCoords = `${start[1]},${start[0]}`;
                 const endCoords = `${end[1]},${end[0]}`;
 
@@ -131,14 +130,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 const data = await response.json();
                 console.log('📥 Réponse de l\'API:', data);
 
-                // Nettoyage des anciennes routes et markers
+
                 map.eachLayer((layer) => {
                     if (layer instanceof L.Marker || layer instanceof L.GeoJSON) {
                         map.removeLayer(layer);
                     }
                 });
 
-                // Ajout des nouveaux markers
+
                 console.log('📍 Ajout des markers');
                 const startMarker = L.marker([start[0], start[1]]).addTo(map);
                 const endMarker = L.marker([end[0], end[1]]).addTo(map);

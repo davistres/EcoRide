@@ -3,7 +3,7 @@
 <main>
     <section class="login-section">
         <h2>Connexion</h2>
-        <form class="login-form">
+        <form class="login-form" method="POST" id="loginForm">
             <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" required>
