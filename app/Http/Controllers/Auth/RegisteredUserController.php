@@ -1,50 +1,58 @@
 <?php
-
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
-use Illuminate\View\View;
 
 class RegisteredUserController extends Controller
 {
-    /**
-     * Display the registration view.
-     */
-    public function create(): View
+
+    public function create()
     {
         return view('auth.register');
     }
 
-    /**
-     * Handle an incoming registration request.
-     *
-     * @throws \Illuminate\Validation\ValidationException
-     */
-    public function store(Request $request): RedirectResponse
+    /*demande d'inscription*/
+    public function store(Request $request)
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        try {
+            DB::connection()->getPdo();
+        } catch (\Exception $e) {
+            return redirect()->route('register')->with('error', "❌ Erreur de connexion à la base : " . $e->getMessage());
+        }
+
+        $validatedData = $request->validate([
+            'pseudo'   => ['required', 'string', 'max:255'],
+            'email'    => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'confirmed', 'min:8'],
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        try {
+            DB::beginTransaction();
 
-        event(new Registered($user));
+            $user = User::create([
+                'name'     => $validatedData['pseudo'],
+                'email'    => $validatedData['email'],
+                'password' => Hash::make($validatedData['password']),
+            ]);
 
-        Auth::login($user);
+            DB::commit();
 
-        return redirect(route('dashboard', absolute: false));
+            if (! $user) {
+                throw new \Exception("L'utilisateur n'a pas été créé !");
+            }
+
+            Auth::login($user);
+
+            return redirect()->route('dashboard')->with('success', 'Inscription réussie !');
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('register')->with('error', "❌ Erreur lors de l'inscription : " . $e->getMessage());
+        }
     }
 }

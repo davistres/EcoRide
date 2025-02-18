@@ -19,7 +19,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Fix pour éviter l'erreur "La clé est trop longue"
         Schema::defaultStringLength(191);
     }
 }

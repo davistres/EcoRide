@@ -13,14 +13,13 @@ return new class extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');                                            // ID de l'utilisateur qui réserve
-            $table->unsignedBigInteger('trip_id');                                            // ID du trajet réservé
-            $table->enum('status', ['pending', 'confirmed', 'canceled'])->default('pending'); // Statut de la réservation
-            $table->timestamps();                                                             // Ajoute created_at et updated_at automatiquement
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('trip_id');
+            $table->enum('status', ['pending', 'confirmed', 'canceled'])->default('pending');
+            $table->timestamps(); // Ajoute created_at et updated_at automatiquement
 
-            // Clé étrangère reliant la réservation à un utilisateur
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            // Clé étrangère reliant la réservation à un trajet
+
             $table->foreign('trip_id')->references('id')->on('trips')->onDelete('cascade');
         });
     }

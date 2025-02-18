@@ -26,35 +26,38 @@
                 <button type="button" class="search-button" id="search">Rechercher un trajet</button>
             </form>
         </section>
-
+        
+        <section class="map-section">
+            <div id="map" class="map"></div>
+        </section>
+        
         <section class="presentation">
             <div class="text-content">
                 <h2>Voyagez autrement avec EcoRide</h2>
-                <p>EcoRide est une startup engagée dans la réduction de l'impact environnemental des déplacements.
-                    Notre mission est de rendre le covoiturage accessible à tous tout en préservant notre planète.</p>
+                <p>EcoRide est une startup française engagée dans la réduction de l'impact environnemental des déplacements. 
+                   Notre mission est de rendre le covoiturage accessible à tous tout en préservant notre planète.</p>
 
                 <div class="features">
                     <div class="feature">
-                        <img src="{{ asset('assets/images/ecolo.webp') }}" alt="Icône écologie">
+                        <img src="{{ asset('images/ecolo.webp') }}" alt="Icône écologie">
                         <h3>Écologique</h3>
                         <p>Nous encourageons particulièrement les trajets en véhicules électriques</p>
                     </div>
                     <div class="feature">
-                        <img src="{{ asset('assets/images/econo.webp') }}" alt="Icône économie">
+                        <img src="{{ asset('images/econo.webp') }}" alt="Icône économie">
                         <h3>Économique</h3>
                         <p>Des trajets à prix réduits pour voyager malin</p>
                     </div>
                     <div class="feature">
-                        <img src="{{ asset('assets/images/commu.webp') }}" alt="Icône communauté">
+                        <img src="{{ asset('images/commu.webp') }}" alt="Icône communauté">
                         <h3>Communautaire</h3>
                         <p>Rejoignez une communauté de voyageurs responsables</p>
                     </div>
                 </div>
             </div>
-
-            <div class="image-banner">
-                <img src="{{ asset('assets/images/pexels-cottonbro-5329298.jpg') }}" alt="Covoiturage EcoRide" class="main-image">
-            </div>
         </section>
+        <div class="image-banner">
+            <img src="{{ asset('images/pexels-cottonbro-5329298.jpg') }}" alt="Covoiturage EcoRide" class="main-image">
+        </div>
     </main>
 @endsection
