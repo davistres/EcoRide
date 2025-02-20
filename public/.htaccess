@@ -1,0 +1,28 @@
+<IfModule mod_rewrite.c>
+    Options -MultiViews -Indexes
+    RewriteEngine On
+
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} . 
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Handle X-XSRF-Token Header
+    RewriteCond %{HTTP:x-xsrf-token} . 
+    RewriteRule .* - [E=HTTP_X_XSRF_TOKEN:%{HTTP:X-XSRF-Token}]
+
+    # Rediriger les URLs sans slash final
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    # Rediriger toutes les requêtes vers index.php
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^ index.php [L]
+
+    # Empêcher l'accès aux fichiers sensibles
+    <FilesMatch "\.(env|json|log|md|sql|sqlite)$">
+        Order allow,deny
+        Deny from all
+    </FilesMatch>
+</IfModule>
