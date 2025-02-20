@@ -148,7 +148,7 @@ class CovoiturageController extends Controller
 
         return response()->json([
             'hasCovoiturage' => ! empty($sessionData),
-            'covoiturages'   => $sessionData, // Ajout pour debug
+            'covoiturages'   => $sessionData,
         ]);
     }
 
