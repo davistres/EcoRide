@@ -10,25 +10,51 @@
         </section>
 
         <section class="search-section">
-            <form class="search-form">
+            <h1>Rechercher un itinéraire</h1>
+            
+            @if(isset($_GET['error']) || isset($_GET['suggested_date']))
+                <div class="message-container">
+                    @if(isset($_GET['error']))
+                        <div class="error-message">{{ $_GET['error'] }}</div>
+                    @endif
+                    
+                    @if(isset($_GET['suggested_date']))
+                        <div class="info-message">
+                            Aucun trajet trouvé pour la date sélectionnée. 
+                            <form action="{{ route('search.covoiturage') }}" method="POST" class="suggested-date-form">
+                                @csrf
+                                <input type="hidden" name="lieu_depart" value="{{ $_GET['departure'] ?? '' }}">
+                                <input type="hidden" name="lieu_arrivee" value="{{ $_GET['arrival'] ?? '' }}">
+                                <input type="hidden" name="date" value="{{ $_GET['suggested_date'] }}">
+                                Essayez plutôt le <strong>{{ date('d/m/Y', strtotime($_GET['suggested_date'])) }}</strong>
+                                <button type="submit" class="suggested-date-btn">Rechercher à cette date</button>
+                            </form>
+                        </div>
+                    @endif
+                </div>
+            @endif
+            
+            <form class="search-form" action="{{ route('search.covoiturage') }}" method="POST">
+                @csrf
                 <div class="form-group">
                     <label for="departure">Départ</label>
-                    <input type="text" id="departure" name="departure" placeholder="Ville de départ" required>
+                    <input type="text" id="departure" name="lieu_depart" 
+                           placeholder="Ville de départ" required
+                           value="{{ $_GET['departure'] ?? '' }}">
                 </div>
                 <div class="form-group">
                     <label for="arrival">Arrivée</label>
-                    <input type="text" id="arrival" name="arrival" placeholder="Ville d'arrivée" required>
+                    <input type="text" id="arrival" name="lieu_arrivee" 
+                           placeholder="Ville d'arrivée" required
+                           value="{{ $_GET['arrival'] ?? '' }}">
                 </div>
                 <div class="form-group">
                     <label for="date">Date</label>
-                    <input type="date" id="date" name="date" required>
+                    <input type="date" id="date" name="date" required
+                           value="{{ $_GET['date'] ?? '' }}">
                 </div>
-                <button type="button" class="search-button" id="search">Rechercher un trajet</button>
+                <button type="submit" class="search-button">Rechercher un trajet</button>
             </form>
-        </section>
-        
-        <section class="map-section">
-            <div id="map" class="map"></div>
         </section>
         
         <section class="presentation">
@@ -56,8 +82,5 @@
                 </div>
             </div>
         </section>
-        <div class="image-banner">
-            <img src="{{ asset('images/pexels-cottonbro-5329298.jpg') }}" alt="Covoiturage EcoRide" class="main-image">
-        </div>
     </main>
 @endsection

@@ -14,9 +14,11 @@
             <li><a href="{{ route('contact') }}">Contact</a></li>
 
             @auth
-                <li><a href="{{ route('dashboard') }}" class="user-pseudo">
-                    {{ Auth::user()->pseudo ?? 'Utilisateur' }}
-                </a></li>
+                <li>
+                    <a href="{{ route('dashboard') }}" class="user-nom">
+                        {{ Auth::user()->nom ?? 'Utilisateur' }}
+                    </a>
+                </li>
                 <li>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
@@ -33,10 +35,10 @@
         <a href="{{ route('home') }}">Accueil</a>
         <a href="{{ route('trips.index') }}">Covoiturage</a>
         <a href="{{ route('contact') }}">Contact</a>
-    
-        @if(Auth::check())
-            <a href="{{ route('dashboard') }}" class="user-pseudo">
-                {{ Auth::user()->pseudo ?? 'Utilisateur' }}
+
+        @auth
+            <a href="{{ route('dashboard') }}" class="user-nom">
+                {{ Auth::user()->nom ?? 'Utilisateur' }}
             </a>
             <a href="{{ route('logout') }}"
                onclick="event.preventDefault(); document.getElementById('logout-form-mobile').submit();">
@@ -47,8 +49,8 @@
             </form>
         @else
             <a href="{{ route('login') }}">Connexion</a>
-        @endif
-    
+        @endauth
+
         <div class="close-menu" id="close-menu">&times;</div>
     </div>
 </header>

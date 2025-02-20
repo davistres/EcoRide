@@ -9,12 +9,12 @@
     <title>{{ config('app.name', 'EcoRide') }}</title>
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
-    <script defer src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    
 
  
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
-    <script defer src="{{ asset('js/script.js') }}"></script>
+   
 </head>
 <body>
    
@@ -27,5 +27,7 @@
 
     
     @include('layouts.footer')
+    <script defer src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script defer src="{{ asset('js/script.js') }}"></script>
 </body>
 </html>

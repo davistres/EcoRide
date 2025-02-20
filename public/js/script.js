@@ -7,23 +7,61 @@ document.addEventListener("DOMContentLoaded", async function () {
     const closeMenu = document.getElementById("close-menu");
     let isMenuOpen = false;
 
-    function toggleMenu() {
-        isMenuOpen = !isMenuOpen;
-        mobileMenu?.classList.toggle("active", isMenuOpen);
+    console.log("Burger:", burger);
+    console.log("Mobile Menu:", mobileMenu);
+    console.log("Close Menu:", closeMenu);
+
+    if (!burger) {
+        console.error("Erreur : Élément #burger non trouvé !");
+    } else {
+        console.log("Élément #burger détecté !");
     }
 
-    burger?.addEventListener("click", (e) => {
+    if (!mobileMenu) {
+        console.error("Erreur : Élément #mobile-menu non trouvé !");
+    } else {
+        console.log("Élément #mobile-menu détecté !");
+    }
+
+    if (!closeMenu) {
+        console.error("Erreur : Élément #close-menu non trouvé !");
+    } else {
+        console.log("Élément #close-menu détecté !");
+    }
+
+    function toggleMenu() {
+        console.log("ToggleMenu appelé. État actuel:", isMenuOpen);
+        isMenuOpen = !isMenuOpen;
+        console.log("Nouvel état:", isMenuOpen);
+
+        if (mobileMenu) {
+            if (isMenuOpen) {
+                mobileMenu.classList.add("active");
+                console.log("Classe 'active' ajoutée au menu mobile");
+            } else {
+                mobileMenu.classList.remove("active");
+                console.log("Classe 'active' retirée du menu mobile");
+            }
+        } else {
+            console.error("🚨 Erreur: mobileMenu est null lors du toggle");
+        }
+    }
+
+    burger?.addEventListener("click", function (e) {
+        console.log("Clic détecté directement sur le burger !");
         e.stopPropagation();
         toggleMenu();
     });
 
-    closeMenu?.addEventListener("click", (e) => {
-        e.preventDefault();
+    closeMenu?.addEventListener("click", function (e) {
+        console.log("✅ Clic détecté directement sur le bouton de fermeture !");
+        e.stopPropagation();
         toggleMenu();
     });
 
     document.addEventListener("click", (e) => {
         if (isMenuOpen && !mobileMenu?.contains(e.target) && !burger?.contains(e.target)) {
+            console.log("Clic à l'extérieur détecté. Fermeture du menu.");
             toggleMenu();
         }
     });
@@ -35,73 +73,123 @@ document.addEventListener("DOMContentLoaded", async function () {
         }
     });
 
-    // Validation form
-    const passwordInput = document.getElementById("password");
-    const confirmPasswordInput = document.getElementById("confirm-password");
-    const registerForm = document.querySelector(".login-form");
+    // améliore l'affichage du lien "Covoiturage"
+    const covoiturageLinks = document.querySelectorAll(".covoiturage-link");
 
-    function validatePasswords() {
-        if (passwordInput?.value !== confirmPasswordInput?.value) {
-            confirmPasswordInput.setCustomValidity("Les mots de passe ne correspondent pas");
-            confirmPasswordInput.classList.add("password-mismatch");
-        } else {
-            confirmPasswordInput.setCustomValidity("");
-            confirmPasswordInput.classList.remove("password-mismatch");
+    // Masquer les liens au chargement de la page
+    covoiturageLinks.forEach(link => {
+        link.classList.add("hidden");
+        console.log("Lien covoiturage masqué au chargement initial");
+    });
+
+    async function checkCovoiturageSession() {
+        try {
+            console.log("Vérification de session covoiturage en cours...");
+            const response = await fetch("/check-session");
+
+            if (!response.ok) {
+                throw new Error(`Erreur HTTP: ${response.status}`);
+            }
+
+            const data = await response.json();
+            console.log("Réponse de check-session:", data);
+
+            if (data.hasCovoiturage) {
+                covoiturageLinks.forEach(link => {
+                    link.classList.remove("hidden");
+                    console.log("Lien covoiturage affiché - des covoiturages sont disponibles");
+                });
+            } else {
+                covoiturageLinks.forEach(link => {
+                    link.classList.add("hidden");
+                    console.log("Lien covoiturage masqué - aucun covoiturage disponible");
+                });
+            }
+        } catch (error) {
+            console.error("Erreur lors de la vérification de la session :", error);
+
+            covoiturageLinks.forEach(link => link.classList.add("hidden"));
         }
     }
 
-    passwordInput?.addEventListener("input", validatePasswords);
-    confirmPasswordInput?.addEventListener("input", validatePasswords);
+    // Vérif auto au chargement
+    await checkCovoiturageSession();
 
-    registerForm?.addEventListener("submit", function (event) {
-        validatePasswords();
-        if (!registerForm.checkValidity()) {
-            event.preventDefault();
-        }
-    });
-
-    // Formulaire
-    document.getElementById("contact-form")?.addEventListener("submit", function (event) {
-        const email = document.getElementById("email");
-        const subject = document.getElementById("subject");
-        const message = document.getElementById("message");
-
-        if (!email.value.trim()) {
-            email.setCustomValidity("Veuillez saisir votre email");
-            event.preventDefault();
-        } else {
-            email.setCustomValidity("");
-        }
-
-        if (!subject.value.trim()) {
-            subject.setCustomValidity("Veuillez sélectionner un sujet");
-            event.preventDefault();
-        } else {
-            subject.setCustomValidity("");
-        }
-
-        if (!message.value.trim()) {
-            message.setCustomValidity("Veuillez saisir un message");
-            event.preventDefault();
-        } else {
-            message.setCustomValidity("");
-        }
-    });
-
-    // carte
-    const mapElement = document.getElementById("map");
-    if (!mapElement) {
-        console.error("L'élément #map n'existe pas !");
-        return;
+    // Vérif session après une recherche
+    const searchForm = document.querySelector(".search-form");
+    if (searchForm) {
+        searchForm.addEventListener("submit", async (e) => {
+            console.log("Formulaire de recherche soumis");
+        });
     }
 
+    // Vérif session au changement de page
+    window.addEventListener("pageshow", checkCovoiturageSession);
+});
+
+// Validation formulaire d'inscription
+const passwordInput = document.getElementById("password");
+const confirmPasswordInput = document.getElementById("confirm-password");
+const registerForm = document.querySelector(".login-form");
+
+function validatePasswords() {
+    if (passwordInput?.value !== confirmPasswordInput?.value) {
+        confirmPasswordInput.setCustomValidity("Les mots de passe ne correspondent pas");
+        confirmPasswordInput.classList.add("password-mismatch");
+    } else {
+        confirmPasswordInput.setCustomValidity("");
+        confirmPasswordInput.classList.remove("password-mismatch");
+    }
+}
+
+passwordInput?.addEventListener("input", validatePasswords);
+confirmPasswordInput?.addEventListener("input", validatePasswords);
+
+registerForm?.addEventListener("submit", function (event) {
+    validatePasswords();
+    if (!registerForm.checkValidity()) {
+        event.preventDefault();
+    }
+});
+
+// Formulaire de contact
+document.getElementById("contact-form")?.addEventListener("submit", function (event) {
+    const email = document.getElementById("email");
+    const subject = document.getElementById("subject");
+    const message = document.getElementById("message");
+
+    if (!email.value.trim()) {
+        email.setCustomValidity("Veuillez saisir votre email");
+        event.preventDefault();
+    } else {
+        email.setCustomValidity("");
+    }
+
+    if (!subject.value.trim()) {
+        subject.setCustomValidity("Veuillez sélectionner un sujet");
+        event.preventDefault();
+    } else {
+        subject.setCustomValidity("");
+    }
+
+    if (!message.value.trim()) {
+        message.setCustomValidity("Veuillez saisir un message");
+        event.preventDefault();
+    } else {
+        message.setCustomValidity("");
+    }
+});
+
+// Carte
+const mapElement = document.getElementById("map");
+if (mapElement) {
     console.log("Carte détectée, initialisation...");
     const map = L.map("map").setView([46.603354, 1.888334], 6);
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution: "© OpenStreetMap contributors",
     }).addTo(map);
 
-    // récupérer les coordonnées
+    // Récupérer les coordonnées
     async function getCoordinates(city) {
         try {
             console.log(`Recherche des coordonnées pour : ${city}`);
@@ -121,7 +209,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         }
     }
 
-    // récupérer itinéraire
+    // Récupérer itinéraire
     async function getRoute(start, end) {
         try {
             console.log("Calcul de l'itinéraire...");
@@ -157,7 +245,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         }
     }
 
-    // formulaire de recherche
+    // Formulaire de recherche
     document.getElementById("search")?.addEventListener("click", async (e) => {
         e.preventDefault();
         const departure = document.getElementById("departure").value.trim();
@@ -178,4 +266,4 @@ document.addEventListener("DOMContentLoaded", async function () {
             console.error("Impossible de tracer l'itinéraire : coordonnées manquantes.");
         }
     });
-});
+}
