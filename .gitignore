@@ -27,3 +27,5 @@ database/database.sqlite
 database/database.sqlite-journal
 /coverage/
 /.phpunit.cache
+id_rsa
+id_rsa.pub
